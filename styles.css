@@ -14,6 +14,14 @@ body {
     background: #02B0D5;
 }
 
+h1 {
+    font-weight: 600;
+    color: white;
+    position: absolute;
+    inset: 100px 840px;
+    height: 5%;
+}
+
 /* calculatr */
 .calculator {
     background: #004B5F;
