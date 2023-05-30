@@ -41,16 +41,69 @@ function operate(a, operator, b) {
 }
 
 function evnt() {
+    let float = false;
     for (i = 0; i < btn.length; i++) {
         btn[i].addEventListener("click", function () {
             let choice = this.innerText;
-            if (Number(choice) < 10 && Number(choice) >= 0) { choice = Number(choice); };
-            if (choice == "C") { num = 0; f_num = 0; s_num = 0; operator = ""; display.innerText = 0; }
-            else if (choice != "=" && f_num == 0 && s_num == 0 && operator == "" && num > 0) { display.innerText = 0; }
-            else if (choice == "=" && f_num > 0 && s_num > 0 && operator != "") { display.innerText = operate(f_num, operator, s_num); f_num = 0; s_num = 0; num = 0; operator = ""; }
-            else if (typeof (choice) == "number" && f_num > 0 && operator != "") { num = (num * 10) + choice; s_num = num; display.innerText = operator + s_num; }
-            else if ((choice != "=" && typeof (choice) != "number") && f_num > 0) { operator = choice; num = 0; display.innerText = operator; }
-            else if (typeof (choice) == "number") { num = (num * 10) + choice; f_num = num; display.innerText = f_num; };
+            if (Number(choice) < 10 && Number(choice) >= 0) {
+                choice = Number(choice);
+            };
+            if (choice == ".") {
+                float = true;
+            }
+            if (choice == "C") {
+                num = 0; f_num = 0;
+                s_num = 0;
+                operator = "";
+                display.innerText = 0;
+                float = false;
+            }
+            else if (choice != "=" && f_num == 0 && s_num == 0 && operator == "" && num > 0) {
+                display.innerText = 0;
+            }
+            else if (choice == "=" && f_num > 0 && s_num > 0 && operator != "") {
+                display.innerText = operate(f_num, operator, s_num);
+                f_num = 0; s_num = 0;
+                num = 0; operator = "";
+                float = false;
+            }
+            else if (typeof (choice) == "number" && f_num > 0 && operator != "" && float == false) {
+                num = (num * 10) + choice;
+                s_num = num; display.innerText = operator + s_num;
+            }
+            else if (float == true && operator != "") {
+                if (choice == ".") { display.innerText = operator+s_num+"."; }
+                else { 
+                    choice = choice / 10;
+                    console.log(choice);
+                    num = num + choice;
+                    s_num = num;
+                    display.innerText = operator+s_num;
+                };
+            }
+            else if ((choice != "=" && typeof (choice) != "number") && f_num > 0 && choice != ".") {
+                operator = choice;
+                num = 0;
+                display.innerText = operator;
+                float = false;
+            }
+            else if (typeof (choice) == "number" && float==false) {
+                num = (num * 10) + choice;
+                f_num = num;
+                display.innerText = f_num;
+                console.log(f_num);
+            }
+            else if (float == true) {
+                if (choice == ".") { display.innerText = f_num+"."; }
+                else { 
+                    choice = choice / 10;
+                    console.log(choice);
+                    num = num + choice;
+                    f_num = num;
+                    display.innerText = f_num;
+                };
+            };
+            console.log(f_num, s_num, operator);
         });
     };
 };
