@@ -1,9 +1,12 @@
 // calling html elements
+
 const btn = document.querySelectorAll("button");
 const display = document.querySelector("h2");
+const hist = document.querySelector("h3");
 
 
 // delcarign variables
+
 let f_num = 0;
 let s_num = 0;
 let operator = "";
@@ -12,6 +15,7 @@ let num = 0;
 
 
 // declaring functions
+
 function add(a, b) {
     return a + b;
 }
@@ -40,6 +44,7 @@ function operate(a, operator, b) {
     else if (operator == "%") { return mod(a, b); };
 }
 
+// calculator
 function evnt() {
     let float = false;
     for (i = 0; i < btn.length; i++) {
